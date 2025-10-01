@@ -9,8 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.avyaan_emotilog.R;
+import com.example.avyaan_emotilog.ui.dashboard.DataManager;
+import com.example.avyaan_emotilog.ui.dashboard.EmotionLog;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,7 @@ public class HomeFragment extends Fragment implements EmotionAdapter.OnEmotionCl
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
         setupEmotionButtons(root);
-
         return root;
     }
 
@@ -52,11 +51,20 @@ public class HomeFragment extends Fragment implements EmotionAdapter.OnEmotionCl
 
     @Override
     public void onEmotionClick(Emotion emotion) {
-        // This is where you'll log the emotion
-        Toast.makeText(getContext(), "Clicked: " + emotion.getName() + " " + emotion.getIcon(),
-                Toast.LENGTH_SHORT).show();
+        // Create log entry with current timestamp
+        EmotionLog log = new EmotionLog(  // ← Changed: Remove full package path
+                emotion.getName(),
+                emotion.getIcon(),
+                System.currentTimeMillis()
+        );
 
-        // TODO: Add emotion to DataManager with timestamp
+        // Add to DataManager
+        DataManager.getInstance().addEmotionLog(log);
+
+        // Show confirmation
+        Toast.makeText(getContext(),
+                "Logged: " + emotion.getIcon() + " " + emotion.getName(),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
