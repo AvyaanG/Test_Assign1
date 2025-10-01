@@ -13,7 +13,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"/>
 
     <!-- RecyclerView for logs -->
     <androidx.recyclerview.widget.RecyclerView

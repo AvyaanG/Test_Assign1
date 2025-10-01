@@ -4,39 +4,32 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:background="@android:drawable/dialog_holo_light_frame">
+    android:layout_marginBottom="16dp"
+    android:background="#FFFFFF"
+    android:elevation="4dp">
 
-    <!-- Date Header -->
     <TextView
         android:id="@+id/summaryDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Oct 5, 2025"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#666666"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"/>
 
-    <!-- Total Count -->
-    <TextView
-        android:id="@+id/summaryTotalCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Total Count: 15"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="end"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Container where emotions will be added dynamically -->
     <LinearLayout
         android:id="@+id/emotionsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/summaryTotalCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:gravity="end"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"/>
 
 </LinearLayout>
