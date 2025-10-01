@@ -3,4 +3,5 @@
     <string name="title_home">EmotiCon</string>
     <string name="title_dashboard">EmotiLog</string>
     <string name="title_notifications">DailySummary</string>
+    <string name="total_count">Total Count: %1$d</string>
 </resources>
