@@ -20,8 +20,7 @@ public class NotificationsFragment extends Fragment {
     private LinearLayout summaryContainer;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         summaryContainer = root.findViewById(R.id.summaryContainer);
         loadSummary();
@@ -31,45 +30,39 @@ public class NotificationsFragment extends Fragment {
     private void loadSummary() {
         summaryContainer.removeAllViews();
 
-        Map<String, List<EmotionLog>> logsByDate = DataManager.getInstance().getLogsByDate();
-        List<String> sortedDates = DataManager.getInstance().getSortedDates();
+        DataManager dataManager = DataManager.getInstance();
+        Map<String, List<EmotionLog>> logsByDate = dataManager.getLogsByDate();
+        List<String> dates = dataManager.getSortedDates();
 
-        for (String date : sortedDates) {
-            View dateCard = LayoutInflater.from(getContext()).inflate(R.layout.item_summary, summaryContainer, false);
+        for (String date : dates) {
+            View card = LayoutInflater.from(getContext()).inflate(R.layout.item_summary, summaryContainer, false);
 
-            TextView dateText = dateCard.findViewById(R.id.summaryDate);
-            LinearLayout emotionsContainer = dateCard.findViewById(R.id.emotionsContainer);
-            TextView totalText = dateCard.findViewById(R.id.summaryTotalCount);
+            TextView dateText = card.findViewById(R.id.summaryDate);
+            LinearLayout emotionsBox = card.findViewById(R.id.emotionsContainer);
+            TextView totalText = card.findViewById(R.id.summaryTotalCount);
 
             dateText.setText("Date: " + date);
             dateText.setVisibility(View.VISIBLE);
 
-            Map<String, Integer> emotionCounts = new HashMap<>();
-            int total = 0;
+            Map<String, Integer> counts = new HashMap<>();
+            List<EmotionLog> logs = logsByDate.get(date);
 
-            for (EmotionLog log : logsByDate.get(date)) {
+            for (EmotionLog log : logs) {
                 String key = log.getEmotionIcon() + " " + log.getEmotionName();
-                emotionCounts.put(key, emotionCounts.getOrDefault(key, 0) + 1);
-                total++;
+                counts.put(key, counts.getOrDefault(key, 0) + 1);
             }
 
-            for (Map.Entry<String, Integer> entry : emotionCounts.entrySet()) {
-                TextView emotionRow = new TextView(getContext());
-                emotionRow.setText(entry.getKey() + " → " + entry.getValue());
-                emotionRow.setTextSize(16f);
-                emotionRow.setPadding(0, 8, 0, 8);
-                emotionsContainer.addView(emotionRow);
+            for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+                TextView row = new TextView(getContext());
+                row.setText(entry.getKey() + " → " + entry.getValue());
+                row.setTextSize(16f);
+                row.setPadding(0, 8, 0, 8);
+                emotionsBox.addView(row);
             }
 
-            totalText.setText("Total Count: " + total);
+            totalText.setText("Total Count: " + logs.size());
             totalText.setVisibility(View.VISIBLE);
-            summaryContainer.addView(dateCard);
+            summaryContainer.addView(card);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadSummary();
     }
 }
