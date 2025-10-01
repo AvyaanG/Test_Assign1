@@ -1,5 +1,5 @@
 package com.example.avyaan_emotilog.ui.home;
-
+//Emotion class represents emotion types and initiliazes getter and setter methods
 public class Emotion {
     private String name;
     private String icon;

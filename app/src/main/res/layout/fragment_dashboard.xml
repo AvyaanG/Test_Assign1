@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- Title -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/logsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Emotion Logs"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="10dp"/>
-
-    <!-- RecyclerView for logs -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/logRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="16dp"/>
+</ScrollView>

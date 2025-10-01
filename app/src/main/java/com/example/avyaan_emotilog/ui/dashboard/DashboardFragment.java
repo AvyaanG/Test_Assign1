@@ -4,48 +4,43 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.example.avyaan_emotilog.R;
 import java.util.List;
-
+//Displays list of all logged emotions.
+//Shows all EmotionLog entries in scrollable list
 public class DashboardFragment extends Fragment {
 
-    private RecyclerView logRecyclerView;
-    private LogAdapter logAdapter;
+    private LinearLayout logsContainer;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-        logRecyclerView = root.findViewById(R.id.logRecyclerView);
-
-        // Get logs from DataManager
-        List<EmotionLog> logs = DataManager.getInstance().getEmotionLogs();
-
-        // Set up adapter
-        logAdapter = new LogAdapter(getContext(), logs);
-        logRecyclerView.setAdapter(logAdapter);
-        logRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        logsContainer = root.findViewById(R.id.logsContainer);
+        loadLogs();
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Refresh logs when returning to this fragment
-        if (logAdapter != null) {
-            logAdapter.notifyDataSetChanged();
-        }
-    }
+    private void loadLogs() {
+        logsContainer.removeAllViews();
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        logRecyclerView = null;
-        logAdapter = null;
+        List<EmotionLog> logs = DataManager.getInstance().getEmotionLogs();
+
+        for (EmotionLog log : logs) {
+            View logCard = LayoutInflater.from(getContext()).inflate(R.layout.item_log, logsContainer, false);
+
+            TextView iconView = logCard.findViewById(R.id.logEmotionIcon);
+            TextView nameView = logCard.findViewById(R.id.logEmotionName);
+            TextView timeView = logCard.findViewById(R.id.logTimestamp);
+
+            iconView.setText(log.getEmotionIcon());
+            nameView.setText("(" + log.getEmotionName() + ")");
+            timeView.setText(log.getFormattedDateTime());
+
+            logsContainer.addView(logCard);
+        }
     }
 }

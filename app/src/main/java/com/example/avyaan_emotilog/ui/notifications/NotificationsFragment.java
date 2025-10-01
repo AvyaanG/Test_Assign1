@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-public class NotificationsFragment extends Fragment {
+//Shows daily summary with emotion counts and frequencies. Supports date filtering so the user can select date which they want to see the daily summary for
+public class NotificationsFragment extends Fragment { //LLM USED FOR CLARIFYING LOGIC AND GETTING THE UI TO WORK
 
     private LinearLayout summaryContainer;
     private Button btnSelectDate;
@@ -60,7 +60,7 @@ public class NotificationsFragment extends Fragment {
 
         datePickerDialog.show();
     }
-
+//LLM Used for code below, slight help in logic and java coding
     private void loadSummary(String filterDate) {
         summaryContainer.removeAllViews();
 

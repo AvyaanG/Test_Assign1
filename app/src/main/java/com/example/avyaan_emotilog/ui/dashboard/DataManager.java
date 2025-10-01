@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+// Singleton that stores all emotion logs in memory.
 
 public class DataManager {
     private static DataManager instance;

@@ -3,7 +3,7 @@ package com.example.avyaan_emotilog.ui.dashboard;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
+//represents a single logged emotion entry and provided getter and setter methods for getEmotionName(), getEmotionIcon(), getTimestamp() getFormattedDateTime()
 public class EmotionLog {
     private String emotionName;
     private String emotionIcon;

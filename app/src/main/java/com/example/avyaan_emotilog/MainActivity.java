@@ -12,6 +12,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.avyaan_emotilog.databinding.ActivityMainBinding;
 
+//Main Class, entry point of the app, I chose a template called bottom navigation , therefore a lot of classes are extended to pre-built java classes
+//Hosts the bottom navigation and manages fragment switching.
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
